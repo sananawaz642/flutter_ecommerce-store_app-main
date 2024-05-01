@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "408439015739",
+    "project_id": "flutte-ecommerce",
+    "storage_bucket": "flutte-ecommerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408439015739:android:0ba771a1ac616ca3e60f1e",
+        "android_client_info": {
+          "package_name": "com.sinasys.e_commerce_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaP0dSlvK0ONui_VyRQAruwPcITUdVPO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
