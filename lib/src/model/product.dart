@@ -13,6 +13,7 @@ class Product {
   List<String> images;
   bool isFavorite;
   double rating;
+  
   ProductType type;
 
   int get quantity => _quantity;
