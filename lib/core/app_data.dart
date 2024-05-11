@@ -32,7 +32,7 @@ class AppData {
       ],
       isFavorite: true,
       rating: 1,
-      type: ProductType.mobile,
+      type: ProductType.flat,
     ),
     Product(
       name: 'Samsung Galaxy Tab S7 FE',
@@ -48,7 +48,7 @@ class AppData {
       ],
       isFavorite: false,
       rating: 4,
-      type: ProductType.tablet,
+      type: ProductType.trousers,
     ),
     Product(
       name: 'Samsung Galaxy Tab S8+',
@@ -64,7 +64,7 @@ class AppData {
       ],
       isFavorite: false,
       rating: 3,
-      type: ProductType.tablet,
+      type: ProductType.trousers,
     ),
     Product(
       name: 'Samsung Galaxy Watch 4',
@@ -87,7 +87,7 @@ class AppData {
           Categorical(CategoricalType.large, false),
         ],
       ),
-      type: ProductType.watch,
+      type: ProductType.shirts,
     ),
     Product(
       name: 'Apple Watch 7',
@@ -106,7 +106,7 @@ class AppData {
       sizes: ProductSizeType(
         numerical: [Numerical('41', true), Numerical('45', false)],
       ),
-      type: ProductType.watch,
+      type: ProductType.shirts,
     ),
     Product(
         name: 'Beats studio 3',
@@ -123,7 +123,7 @@ class AppData {
         ],
         isFavorite: false,
         rating: 2,
-        type: ProductType.headphone),
+        type: ProductType.blazers),
     Product(
       name: 'Samsung Q60 A',
       price: 497,
@@ -144,7 +144,7 @@ class AppData {
           Numerical('55', false)
         ],
       ),
-      type: ProductType.tv,
+      type: ProductType.dupata,
     ),
     Product(
       name: 'Sony x 80 J',
@@ -166,7 +166,7 @@ class AppData {
         ],
       ),
       rating: 2,
-      type: ProductType.tv,
+      type: ProductType.dupata,
     ),
   ];
 
@@ -177,23 +177,23 @@ class AppData {
       Icons.all_inclusive,
     ),
     ProductCategory(
-      ProductType.mobile,
+      ProductType.flat,
       false,
       FontAwesomeIcons.mobileScreenButton,
     ),
-    ProductCategory(ProductType.watch, false, Icons.watch),
+    ProductCategory(ProductType.shirts, false, Icons.watch),
     ProductCategory(
-      ProductType.tablet,
+      ProductType.trousers,
       false,
       FontAwesomeIcons.tablet,
     ),
     ProductCategory(
-      ProductType.headphone,
+      ProductType.blazers,
       false,
       Icons.headphones,
     ),
     ProductCategory(
-      ProductType.tv,
+      ProductType.dupata,
       false,
       Icons.tv,
     ),
