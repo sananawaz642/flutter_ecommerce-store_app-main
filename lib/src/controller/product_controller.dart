@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_flutter/core/collection_path.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:e_commerce_flutter/core/app_data.dart';
 import 'package:e_commerce_flutter/src/model/product.dart';
@@ -152,5 +154,18 @@ class ProductController extends GetxController {
       }
     }
     return currentSize;
+  }
+
+
+  Future<List<Product>> getAllParents(String tUID) async {
+    List<Product> parents =[];
+    QuerySnapshot<Map<String, dynamic>> res = await FirebaseFirestore.instance
+        .collection(CollectionPaths.productCollection)
+        // .where('tUID', isEqualTo: tUID)
+        .get();
+    for (var element in res.docs) {
+        parents.add(Product.fromMap(element.data()));
+    }
+    return parents;
   }
 }

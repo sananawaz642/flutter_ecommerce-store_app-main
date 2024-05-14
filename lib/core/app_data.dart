@@ -19,6 +19,13 @@ class AppData {
 
   static List<Product> products = [
     Product(
+      sizes: ProductSizeType(
+        categorical: [
+          Categorical(CategoricalType.small, true),
+          Categorical(CategoricalType.medium, false),
+          Categorical(CategoricalType.large, false),
+        ],
+      ),
       name: 'Samsung Galaxy A53 5G',
       price: 460,
       about: dummyText,
@@ -35,6 +42,13 @@ class AppData {
       type: ProductType.flat,
     ),
     Product(
+      sizes: ProductSizeType(
+        categorical: [
+          Categorical(CategoricalType.small, true),
+          Categorical(CategoricalType.medium, false),
+          Categorical(CategoricalType.large, false),
+        ],
+      ),
       name: 'Samsung Galaxy Tab S7 FE',
       price: 380,
       about: dummyText,
@@ -51,6 +65,13 @@ class AppData {
       type: ProductType.trousers,
     ),
     Product(
+      sizes: ProductSizeType(
+        categorical: [
+          Categorical(CategoricalType.small, true),
+          Categorical(CategoricalType.medium, false),
+          Categorical(CategoricalType.large, false),
+        ],
+      ),
       name: 'Samsung Galaxy Tab S8+',
       price: 650,
       about: dummyText,
@@ -109,6 +130,13 @@ class AppData {
       type: ProductType.shirts,
     ),
     Product(
+      sizes: ProductSizeType(
+        categorical: [
+          Categorical(CategoricalType.small, true),
+          Categorical(CategoricalType.medium, false),
+          Categorical(CategoricalType.large, false),
+        ],
+      ),
         name: 'Beats studio 3',
         price: 230,
         about: dummyText,
