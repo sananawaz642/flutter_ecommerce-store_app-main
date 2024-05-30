@@ -156,15 +156,14 @@ class ProductController extends GetxController {
     return currentSize;
   }
 
-
   Future<List<Product>> getAllParents(String tUID) async {
-    List<Product> parents =[];
+    List<Product> parents = [];
     QuerySnapshot<Map<String, dynamic>> res = await FirebaseFirestore.instance
         .collection(CollectionPaths.productCollection)
         // .where('tUID', isEqualTo: tUID)
         .get();
     for (var element in res.docs) {
-        parents.add(Product.fromMap(element.data()));
+      parents.add(Product.fromMap(element.data()));
     }
     return parents;
   }
