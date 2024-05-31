@@ -11,11 +11,11 @@ import 'package:e_commerce_flutter/src/view/screen/product_list_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  static const List<Widget> screens = [
+  static  List<Widget> screens = [
     ProductListScreen(),
-    FavoriteScreen(),
-    CartScreen(),
-    ProfileScreen()
+    const FavoriteScreen(),
+    const CartScreen(),
+    const ProfileScreen()
   ];
 
   @override

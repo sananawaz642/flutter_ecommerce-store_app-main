@@ -31,10 +31,10 @@ class ProductController extends GetxController {
     update();
   }
 
-  void isFavorite(int index) {
-    filteredProducts[index].isFavorite = !filteredProducts[index].isFavorite;
-    update();
-  }
+  // void isFavorite(int index) {
+  //   filteredProducts[index].isFavorite = !filteredProducts[index].isFavorite;
+  //   update();
+  // }
 
   void addToCart(Product product) {
     product.quantity++;
@@ -72,11 +72,11 @@ class ProductController extends GetxController {
     }
   }
 
-  getFavoriteItems() {
-    filteredProducts.assignAll(
-      allProducts.where((item) => item.isFavorite),
-    );
-  }
+  // getFavoriteItems() {
+  //   filteredProducts.assignAll(
+  //     allProducts.where((item) => item.isFavorite),
+  //   );
+  // }
 
   getCartItems() {
     cartProducts.assignAll(

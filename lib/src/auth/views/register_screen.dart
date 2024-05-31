@@ -1,4 +1,6 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:e_commerce_flutter/core/app_regex.dart';
+import 'package:e_commerce_flutter/src/auth/views/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/app_strings.dart';
@@ -221,9 +223,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       return FilledButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            await Get.find<AuthController>().registerUser(
+                            BotToast.showLoading();
+                            var res = await Get.find<AuthController>().registerUser(
                                 email: emailController.text,
                                 password: passwordController.text);
+                            BotToast.closeAllLoading();
+                            BotToast.showText(text:'Registration successful');
                             nameController.clear();
                             emailController.clear();
                             passwordController.clear();
@@ -247,7 +252,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     context.textTheme.bodySmall?.copyWith(color: Colors.black),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(LoginPage());
+                },
                 child: const Text(AppStrings.login),
               ),
             ],

@@ -37,11 +37,12 @@ class ProductGridView extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.favorite,
-              color: items[index].isFavorite
+              // ToDo: change fav icon color
+              color: false
                   ? Colors.redAccent
-                  : const Color(0xFFA6A3A0),
+                  : Color(0xFFA6A3A0),
             ),
             onPressed: () => likeButtonPressed(index),
           ),
@@ -66,7 +67,7 @@ class ProductGridView extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         padding: const EdgeInsets.all(10),
-        height: 60,
+        height: 70,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(

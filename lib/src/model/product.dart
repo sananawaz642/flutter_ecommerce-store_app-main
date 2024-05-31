@@ -15,7 +15,7 @@ class Product {
   ProductSizeType? sizes;
   int _quantity;
   List<String> images;
-  bool isFavorite;
+  // bool isFavorite;
   double rating;
   ProductType type;
 
@@ -33,7 +33,7 @@ class Product {
     required this.about,
     required this.isAvailable,
     required this.images,
-    required this.isFavorite,
+    // required this.isFavorite,
     required this.rating,
     required this.type,
     required this.sizes
@@ -60,7 +60,7 @@ class Product {
       isAvailable: isAvailable ?? this.isAvailable,
       quantity: quantity ?? this.quantity,
       images: images ?? this.images,
-      isFavorite: isFavorite ?? this.isFavorite,
+      // isFavorite: isFavorite ?? this.isFavorite,
       rating: rating ?? this.rating,
       type: type ?? this.type,
       sizes: sizes ?? this.sizes
@@ -79,7 +79,7 @@ class Product {
     result.addAll({'isAvailable': isAvailable});
     result.addAll({'_quantity': _quantity});
     result.addAll({'images': images});
-    result.addAll({'isFavorite': isFavorite});
+    // result.addAll({'isFavorite': isFavorite});
     result.addAll({'rating': rating});
   
     return result;
@@ -95,7 +95,7 @@ class Product {
       quantity: map['_quantity']?.toInt() ?? 0,
       type: ProductType.values.firstWhere((e) => e.toString() == map['type']),
       images: List<String>.from(map['images']),
-      isFavorite: map['isFavorite'] ?? false,
+      // isFavorite: map['isFavorite'] ?? false,
       rating: map['rating']?.toDouble() ?? 0.0,
       sizes: ProductSizeType.fromMap(map['sizes'])
     );
@@ -107,7 +107,7 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(name: $name, price: $price, off: $off, about: $about, isAvailable: $isAvailable, _quantity: $_quantity, images: $images, isFavorite: $isFavorite, rating: $rating)';
+    return 'Product(name: $name, price: $price, off: $off, about: $about, isAvailable: $isAvailable, _quantity: $_quantity, images: $images, rating: $rating)';
   }
 
   @override
@@ -122,7 +122,7 @@ class Product {
       other.isAvailable == isAvailable &&
       other._quantity == _quantity &&
       listEquals(other.images, images) &&
-      other.isFavorite == isFavorite &&
+      // other.isFavorite == isFavorite &&
       other.rating == rating;
   }
 
@@ -135,7 +135,7 @@ class Product {
       isAvailable.hashCode ^
       _quantity.hashCode ^
       images.hashCode ^
-      isFavorite.hashCode ^
+      // isFavorite.hashCode ^
       rating.hashCode;
   }
 }
