@@ -1,27 +1,26 @@
 
+import 'package:e_commerce_flutter/admin_app/admin_auth/controller/auth_controller.dart';
 import 'package:e_commerce_flutter/core/app_text_styles.dart';
-import 'package:e_commerce_flutter/src/auth/controller/auth_controller.dart';
-import 'package:e_commerce_flutter/src/auth/views/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/app_regex.dart';
 import 'widgets/gradient_bg.dart';
 import 'widgets/text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class AdminLoginPage extends StatefulWidget {
+  const AdminLoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<AdminLoginPage> createState() => _AdminLoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _AdminLoginPageState extends State<AdminLoginPage> {
   final _formKey = GlobalKey<FormState>();
+  var authController = Get.put(AdminAuthController());
 
   final ValueNotifier<bool> passwordNotifier = ValueNotifier(true);
   final ValueNotifier<bool> fieldValidNotifier = ValueNotifier(false);
 
-  final ValueNotifier<bool> isAdmin = ValueNotifier(false);
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
@@ -154,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                       return FilledButton(
                         onPressed: (){
                           if(_formKey.currentState!.validate()){
-                            Get.find<AuthController>().loginWithEmailAndPassword(emailAddress: emailController.text, password: passwordController.text, isAdmin: isAdmin.value);
+                            Get.find<AdminAuthController>().loginWithEmailAndPassword(emailAddress: emailController.text, password: passwordController.text);
                           }
                         },
                         child: const Text('Login'),
@@ -166,22 +165,22 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Do not have a account?',
-                style: context.textTheme.bodySmall?.copyWith(color: Colors.black),
-              ),
-              const SizedBox(width: 4),
-              TextButton(
-                onPressed: () {
-                  Get.to(const RegisterPage());
-                },
-                child: const Text('Register'),
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Text(
+          //       'Do not have a account?',
+          //       style: context.textTheme.bodySmall?.copyWith(color: Colors.black),
+          //     ),
+          //     const SizedBox(width: 4),
+          //     TextButton(
+          //       onPressed: () {
+          //         Get.to(const RegisterPage());
+          //       },
+          //       child: const Text('Register'),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

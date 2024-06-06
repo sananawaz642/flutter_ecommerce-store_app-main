@@ -1,73 +1,35 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_flutter/admin_app/dashboard/views/admin_dashboard.dart';
+import 'package:e_commerce_flutter/core/collection_path.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class AuthController extends GetxController {
+class AdminAuthController extends GetxController {
   RxBool unreadNotification = false.obs;
   @override
   Future<void> onInit() async {
     super.onInit();
   }
 
-
-
-  Future loginWithEmailAndPassword(
+  Future<bool> loginWithEmailAndPassword(
       {required String emailAddress, required String password,bool? isAdmin}) async {
-        if (isAdmin==true) {
-          //Authenticate Admin and show different UI
-        } else {
-          try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: emailAddress, password: password);
-      // FirebaseAuth.instance.signInWithCredential(credential.credential!);
-      print(credential);
-      return true;
-    } on FirebaseAuthException catch (e) {
-      BotToast.closeAllLoading();
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-      BotToast.showText(text: e.code);
-      return false;
-    } catch (e) {
-      BotToast.closeAllLoading();
-      print(e);
-      return false;
-    }
+        try {
+          final data = await FirebaseFirestore.instance.collection(CollectionPaths.admins).where('email', isEqualTo: emailAddress).where('password', isEqualTo: password).get();
+        if (data.docs.isNotEmpty) {
+          Get.offAll(const AdminDashboard());
+          return true;
+        }else{
+          BotToast.showText(text: 'Invalid Credentials');
+          return false;
         }
-    // FirebaseAuth.instance.signOut();
-    
-  }
-
-  Future<bool> registerUser(
-      {required String email, required String password}) async {
-    try {
-      // UserCredential data =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      // registerUserToBE(
-      //     user: user.copyWith(
-      //         firebaseUID: data.user?.uid, photo: data.user?.photoURL));
-      update();
-      return true;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-      BotToast.showText(text: e.code);
-      return false;
-    } catch (e) {
-      print(e);
-      return false;
-    }
+        } catch (e) {
+          return false;
+        }
   }
 
   sendForgetPasswordEmail(String email) async {

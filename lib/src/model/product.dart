@@ -18,7 +18,6 @@ class Product {
   bool isFavorite;
   double rating;
   ProductType type;
-
   int get quantity => _quantity;
 
   set quantity(int newQuantity) {
