@@ -11,6 +11,31 @@ class AuthController extends GetxController {
     super.onInit();
   }
 
+  Future<bool> loginAsAdmin(
+      {required String emailAddress, required String password}) async {
+    // FirebaseAuth.instance.signOut();
+    try {
+      //ToDo: Seperate Login For admin Login
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: emailAddress, password: password);
+      // FirebaseAuth.instance.signInWithCredential(credential.credential!);
+      print(credential);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      BotToast.closeAllLoading();
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+      BotToast.showText(text: e.code);
+      return false;
+    } catch (e) {
+      BotToast.closeAllLoading();
+      print(e);
+      return false;
+    }
+  }
 
 
   Future loginWithEmailAndPassword(

@@ -1,4 +1,5 @@
 import 'package:e_commerce_flutter/admin_app/admin_auth/views/login_screen.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:e_commerce_flutter/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'package:get/get.dart';
 
 import 'src/auth/controller/auth_controller.dart';
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(AuthController());
+
     return GetMaterialApp(
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
           PointerDeviceKind.touch,
         },
       ),
+      builder: BotToastInit(), //1. call BotToastInit
+      navigatorObservers: [BotToastNavigatorObserver()],
       debugShowCheckedModeBanner: false,
       //For Admin Route
       home: const AdminLoginPage(),

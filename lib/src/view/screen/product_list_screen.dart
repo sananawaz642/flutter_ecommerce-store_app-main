@@ -6,52 +6,25 @@ import 'package:e_commerce_flutter/src/controller/product_controller.dart';
 import 'package:e_commerce_flutter/src/view/widget/product_grid_view.dart';
 import 'package:e_commerce_flutter/src/view/widget/list_item_selector.dart';
 
+import '../widget/drawer_widget.dart';
+import '../widget/get_appbar_icon.dart';
+
 enum AppbarActionType { leading, trailing }
 
-final ProductController controller = Get.put(ProductController());
-
-class ProductListScreen extends StatelessWidget {
+class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key});
 
-  Widget appBarActionButton(AppbarActionType type) {
-    IconData icon = Icons.ac_unit_outlined;
+  @override
+  State<ProductListScreen> createState() => _ProductListScreenState();
+}
 
-    if (type == AppbarActionType.trailing) {
-      icon = Icons.search;
-    }
+class _ProductListScreenState extends State<ProductListScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final ProductController controller = Get.put(ProductController());
 
-    return Container(
-      margin: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: AppColor.lightGrey,
-      ),
-      child: IconButton(
-        padding: const EdgeInsets.all(8),
-        constraints: const BoxConstraints(),
-        onPressed: () {},
-        icon: Icon(icon, color: Colors.black),
-      ),
-    );
-  }
-
-  PreferredSize get _appBar {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(100),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              appBarActionButton(AppbarActionType.leading),
-              appBarActionButton(AppbarActionType.trailing),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  // PreferredSize get _appBar {
+  //   return
+  // }
 
   Widget _recommendedProductListView(BuildContext context) {
     return SizedBox(
@@ -163,8 +136,37 @@ class ProductListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     controller.getAllItems();
     return Scaffold(
+      key: _scaffoldKey,
       extendBodyBehindAppBar: true,
-      appBar: _appBar,
+      drawer: const DrawerWidget(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppBarIcon(
+                  icon: Icons.ac_unit_outlined,
+                  onPress: () {
+                    print('clicked on drawer');
+                    // Open the drawer when the menu icon is tapped
+                    _scaffoldKey.currentState!.openDrawer();
+                  },
+                ),
+                AppBarIcon(
+                  icon: Icons.search,
+                  onPress: () {
+                    // Open the drawer when the menu icon is tapped
+                    _scaffoldKey.currentState!.closeDrawer();
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -186,7 +188,9 @@ class ProductListScreen extends StatelessWidget {
                 GetBuilder(builder: (ProductController controller) {
                   return ProductGridView(
                     items: controller.filteredProducts,
-                    likeButtonPressed: (index) => controller.isFavorite(index),
+                    likeButtonPressed: (index) {
+                      // controller.isFavorite(index);
+                    },
                     isPriceOff: (product) => controller.isPriceOff(product),
                   );
                 }),

@@ -1,4 +1,5 @@
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:e_commerce_flutter/core/app_text_styles.dart';
 import 'package:e_commerce_flutter/src/auth/controller/auth_controller.dart';
 import 'package:e_commerce_flutter/src/auth/views/register_screen.dart';
@@ -72,14 +73,14 @@ class _LoginPageState extends State<LoginPage> {
           GradientBackground(
             children: [
               Text(
-                'Sign In To Your Account',
+                'Sign In',
                 style: AppTextStyles.authStyle
               ),
               const SizedBox(height: 6),
               Text('Sign in if you are already registered', style: AppTextStyles.authStyle.copyWith(fontSize: 14)),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 50),
           Form(
             key: _formKey,
             child: Padding(
@@ -135,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: const Text('Forgot password'),
+                    child: const Text('Forget password'),
                   ),
                   // ValueListenableBuilder(
                   //   valueListenable: isAdmin,
@@ -152,16 +153,18 @@ class _LoginPageState extends State<LoginPage> {
                     valueListenable: fieldValidNotifier,
                     builder: (_, isValid, __) {
                       return FilledButton(
-                        onPressed: (){
+                        onPressed: () async{
                           if(_formKey.currentState!.validate()){
-                            Get.find<AuthController>().loginWithEmailAndPassword(emailAddress: emailController.text, password: passwordController.text, isAdmin: isAdmin.value);
+                            BotToast.showLoading();
+                            await Get.find<AuthController>().loginWithEmailAndPassword(emailAddress: emailController.text, password: passwordController.text);
+                            BotToast.closeAllLoading();
                           }
                         },
                         child: const Text('Login'),
                       );
                     },
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 12),
                 ],
               ),
             ),
@@ -173,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Do not have a account?',
                 style: context.textTheme.bodySmall?.copyWith(color: Colors.black),
               ),
-              const SizedBox(width: 4),
+              // const SizedBox(width: 2),
               TextButton(
                 onPressed: () {
                   Get.to(const RegisterPage());

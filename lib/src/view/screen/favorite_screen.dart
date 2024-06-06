@@ -9,7 +9,7 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller.getFavoriteItems();
+    // controller.getFavoriteItems();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -23,7 +23,9 @@ class FavoriteScreen extends StatelessWidget {
           builder: (ProductController controller) {
             return ProductGridView(
               items: controller.filteredProducts,
-              likeButtonPressed: (index) => controller.isFavorite(index),
+              likeButtonPressed: (index) {
+                // controller.isFavorite(index);
+              },
               isPriceOff: (product) => controller.isPriceOff(product),
             );
           },
